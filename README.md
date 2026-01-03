@@ -6,67 +6,66 @@ This site is automatically deployed and updated on **AWS S3** using **GitHub Act
 ---
 
 ## 🚀 Live Website
-👉 [http://git-hub-devops-1234.s3-website.eu-north-1.amazonaws.com](http://git-hub-devops-1234.s3-website.eu-north-1.amazonaws.com)
+
+❌ **HTTP (Not Secure – S3 Website Endpoint)**  
+👉 http://git-hub-devops-1234.s3-website.eu-north-1.amazonaws.com/
+
+✅ **HTTPS (Secure – CloudFront)**  
+👉 https://d2y6nbm2sahhg9.cloudfront.net/
 
 ---
 
 ## 🧩 Project Overview
+
 This is a responsive and modern portfolio website built using **HTML**, **CSS**, and **JavaScript**.  
 It represents my work, technical background, and contact details in a clean and interactive way.
 
 ### ✨ Features
 - Fully responsive design  
 - Smooth scrolling and animations  
-- Showcases projects and contact form  
-- Deployed automatically via **GitHub Actions**  
-- Hosted on **AWS S3** (Static Website Hosting)
+- Showcases projects and contact information  
+- Automatically deployed on every code update  
+- Hosted on AWS using static website hosting  
 
 ---
 
 ## ⚙️ Tech Stack
+
 | Component | Technology |
-|------------|-------------|
+|---------|------------|
 | **Frontend** | HTML, CSS, JavaScript |
 | **Hosting** | AWS S3 |
+| **Secure Delivery** | AWS CloudFront |
 | **Automation** | GitHub Actions |
-| **Region** | `eu-north-1` (Stockholm) |
+| **Region** | eu-north-1 (Stockholm) |
 
 ---
 
-## 🔄 How It Works
+## 🔄 Deployment Workflow (HTTP)
 
-This website follows a **CI/CD (Continuous Integration and Continuous Deployment)** workflow using GitHub Actions and AWS S3.
+1. Website code is pushed to the **main branch** on GitHub.  
+2. GitHub Actions automatically runs the deployment workflow.  
+3. Updated files are uploaded to the **AWS S3 bucket**.  
+4. S3 serves the website using the **HTTP website endpoint**.  
 
-1. You push changes (like HTML, CSS, or JS updates) to the **main branch** on GitHub.  
-2. GitHub Actions automatically detects the update and starts the deployment process.  
-3. The latest version of your website files is uploaded to the **AWS S3 bucket**.  
-4. The S3 bucket is configured for **static website hosting**, making your website instantly available online.  
-5. No manual upload is required — everything is handled automatically!
-
----
-
-## ✅ Testing
-
-To ensure your website deploys successfully:
-
-1. Push any small change (like editing text in `index.html`) to the **main branch**.  
-2. Go to the **Actions** tab in your GitHub repository to see the deployment status.  
-3. Once it shows **“Workflow completed successfully”**, open your live website link:  
-   🔗 [http://git-hub-devops-1234.s3-website.eu-north-1.amazonaws.com](http://git-hub-devops-1234.s3-website.eu-north-1.amazonaws.com)  
-4. Refresh the page — you should see your latest update live!  
+⚠️ This endpoint is **not secure** because it does not support HTTPS.
 
 ---
 
-## 🧑‍💻 Author
-**Varad Gotkhindikar**  
-🌍 Web Developer | Cloud & DevOps Enthusiast  
-📩 Connect: [LinkedIn](#) | [GitHub](#)
+## 🔐 Secure HTTPS Workflow (CloudFront)
+
+To secure the website, **AWS CloudFront** is configured in front of the S3 bucket.
+
+### How HTTPS Works
+
+1. The user accesses the website via the **CloudFront HTTPS URL**.  
+2. CloudFront handles **SSL/TLS encryption**.  
+3. CloudFront fetches content from the **S3 bucket (origin)**.  
+4. Content is cached at edge locations for better performance.  
+5. The website is delivered securely over **HTTPS**.
 
 ---
 
-## 📜 License
-This project is open-source under the **MIT License**.
+## 📊 Architecture Diagram
 
----
-
-**💡 Tip:** Once configured, every commit you push to GitHub instantly updates your AWS-hosted portfolio — no manual steps needed!
+<img width="1793" height="712" alt="Screenshot 2026-01-02 203300" src="https://github.com/user-attachments/assets/64e0f823-d527-45f1-9cac-d20a45267e4b" />
