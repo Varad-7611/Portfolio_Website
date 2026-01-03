@@ -69,3 +69,28 @@ To secure the website, **AWS CloudFront** is configured in front of the S3 bucke
 ## 📊 Architecture Diagram
 
 <img width="1793" height="712" alt="Screenshot 2026-01-02 203300" src="https://github.com/user-attachments/assets/64e0f823-d527-45f1-9cac-d20a45267e4b" />
+
+
+---
+
+## ✅ Testing the Deployment
+
+1. Make a small change (for example, edit `index.html`).  
+2. Push the changes to the **main branch**.  
+3. Go to the **Actions** tab in the GitHub repository.  
+4. Wait for the workflow to complete successfully.  
+5. Open the secure website link and refresh the page:
+
+👉 https://d2y6nbm2sahhg9.cloudfront.net/
+
+---
+
+## 📜 License
+
+This project is open-source and available under the **MIT License**.
+
+---
+
+💡 **Tip:**  
+For production use, always serve static websites through **CloudFront with HTTPS** instead of exposing the S3 website endpoint directly.
+
