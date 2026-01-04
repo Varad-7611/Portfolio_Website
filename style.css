@@ -84,6 +84,11 @@ nav ul li a:hover {
   display: inline-block;
 }
 
+.button1 .btn:hover {
+  background: #0ef;
+  color: #000;
+  box-shadow: 0 0 20px #0ef;
+}
 
 
 
@@ -280,5 +285,6 @@ footer {
     transform: translateX(0);
   }
 }
+
 
 
