@@ -29,7 +29,6 @@ It represents my work, technical background, and contact details in a clean and 
 
 ---
 
-
 ## ⚙️ Tech Stack
 
 | Component | Technology |
