@@ -71,7 +71,6 @@ To secure the website, **AWS CloudFront** is configured in front of the S3 bucke
 
 <img width="1793" height="712" alt="Screenshot 2026-01-02 203300" src="https://github.com/user-attachments/assets/64e0f823-d527-45f1-9cac-d20a45267e4b" />
 
-
 ---
 
 ## ✅ Testing the Deployment
