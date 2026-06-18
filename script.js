@@ -186,6 +186,105 @@ document.addEventListener('DOMContentLoaded', () => {
         animateParticles();
     }
 
+    // Hero Section Mesh Animation
+    const heroCanvas = document.getElementById('hero-mesh-canvas');
+    if (heroCanvas) {
+        const hctx = heroCanvas.getContext('2d');
+        let hParticles = [];
+        let hWidth, hHeight;
+        let mouse = { x: null, y: null };
+
+        const hResize = () => {
+            hWidth = heroCanvas.width = heroCanvas.parentElement.offsetWidth;
+            hHeight = heroCanvas.height = heroCanvas.parentElement.offsetHeight;
+            hInit();
+        };
+
+        window.addEventListener('resize', hResize);
+        window.addEventListener('mousemove', (e) => {
+            const rect = heroCanvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+        });
+
+        class HeroParticle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * hWidth;
+                this.y = Math.random() * hHeight;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.color = Math.random() > 0.5 ? '#00fbff' : '#0088ff';
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > hWidth) this.speedX *= -1;
+                if (this.y < 0 || this.y > hHeight) this.speedY *= -1;
+
+                if (mouse.x !== null && mouse.y !== null) {
+                    const dx = mouse.x - this.x;
+                    const dy = mouse.y - this.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) {
+                        const force = (150 - dist) / 1000;
+                        this.x -= dx * force;
+                        this.y -= dy * force;
+                    }
+                }
+            }
+
+            draw() {
+                hctx.fillStyle = this.color;
+                hctx.beginPath();
+                hctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                hctx.fill();
+            }
+        }
+
+        function hInit() {
+            hParticles = [];
+            const count = Math.floor((hWidth * hHeight) / 12000);
+            for (let i = 0; i < count; i++) {
+                hParticles.push(new HeroParticle());
+            }
+        }
+
+        function hAnimate() {
+            hctx.clearRect(0, 0, hWidth, hHeight);
+
+            for (let i = 0; i < hParticles.length; i++) {
+                hParticles[i].update();
+                hParticles[i].draw();
+
+                for (let j = i + 1; j < hParticles.length; j++) {
+                    const dx = hParticles[i].x - hParticles[j].x;
+                    const dy = hParticles[i].y - hParticles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 180) {
+                        hctx.strokeStyle = `rgba(0, 251, 255, ${0.4 - dist / 500})`;
+                        hctx.lineWidth = 1;
+                        hctx.beginPath();
+                        hctx.moveTo(hParticles[i].x, hParticles[i].y);
+                        hctx.lineTo(hParticles[j].x, hParticles[j].y);
+                        hctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(hAnimate);
+        }
+
+        hResize();
+        hAnimate();
+    }
+
     // Scroll-Synced Skills Track
     const skillsBarInner = document.querySelector('.skills-bar-inner');
     const skillItems = document.querySelectorAll('.skill-item');
