@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         contentType: 'html'
     });
 
+    
     // Reveal Animations on Scroll
     const observerOptions = {
         threshold: 0.1
