@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         contentType: 'html'
     });
 
-    
+
     // Reveal Animations on Scroll
     const observerOptions = {
         threshold: 0.1
@@ -47,19 +47,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // Form Submission
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = contactForm.querySelector('button');
             const originalText = btn.innerText;
             btn.innerText = 'Sending...';
             btn.disabled = true;
 
-            setTimeout(() => {
-                alert('Thank you, Varad will get back to you soon!');
+            const formData = new FormData(contactForm);
+
+            try {
+                const response = await fetch("https://api.web3forms.com/submit", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert("Success! Your message has been sent.");
+                    contactForm.reset();
+                } else {
+                    alert("Error: " + data.message);
+                }
+            } catch (error) {
+                alert("Something went wrong. Please try again.");
+            } finally {
                 btn.innerText = originalText;
                 btn.disabled = false;
-                contactForm.reset();
-            }, 1500);
+            }
         });
     }
 
