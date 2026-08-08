@@ -237,10 +237,9 @@
         <i class="fas fa-envelope gradient-text" style="font-size: 2rem; margin-bottom: 15px;"></i>
         <h3>AI Agent Attendance Email System</h3>
         <p>AI-powered attendance automation using Google Cloud APIs, Groq LLM & automated email notifications.</p>
-            <a href="https://github.com/Varad-7611/AI-Agent-Attendance-Email-System" target="_blank"
-              class="gradient-text"
-              style="text-decoration: none; font-weight: 600; display: block; margin-top: 15px;">View GitHub <i
-                class="fas fa-arrow-right"></i></a>
+        <a href="https://github.com/Varad-7611/AI-Agent-Attendance-Email-System" target="_blank" class="gradient-text"
+          style="text-decoration: none; font-weight: 600; display: block; margin-top: 15px;">View GitHub <i
+            class="fas fa-arrow-right"></i></a>
       </div>
     </div>
   </section>
@@ -250,13 +249,14 @@
     <h2 class="reveal">Get In <span class="gradient-text">Touch</span></h2>
     <div class="glass-card reveal" style="max-width: 600px; margin: 30px auto;">
       <form id="contact-form">
+        <input type="hidden" name="access_key" value="8c39e0be-484f-4774-8790-07bf56dcc859">
         <div style="display: flex; gap: 20px; margin-bottom: 20px;">
-          <input type="text" placeholder="Name"
+          <input type="text" name="name" placeholder="Name" required
             style="flex: 1; padding: 15px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 10px; color: white;">
-          <input type="email" placeholder="Email"
+          <input type="email" name="email" placeholder="Email" required
             style="flex: 1; padding: 15px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 10px; color: white;">
         </div>
-        <textarea rows="5" placeholder="Message"
+        <textarea name="message" rows="5" placeholder="Message" required
           style="width: 100%; padding: 15px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 10px; color: white; margin-bottom: 20px;"></textarea>
         <button type="submit" class="btn btn-primary" style="width: 100%; border: none; cursor: pointer;">Send
           Message</button>
