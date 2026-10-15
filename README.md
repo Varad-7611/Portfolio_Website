@@ -1,17 +1,14 @@
 # 🌐 Varad Gotkhindikar - Portfolio Website
 
 Welcome to my personal **Portfolio Website**, showcasing my projects, skills, and achievements.  
-This site is automatically deployed and updated on **AWS S3** using **GitHub Actions** whenever new changes are pushed to the repository.
+This site is built and deployed automatically by **Netlify** whenever changes are pushed to the repository.
 
 ---
 
 ## 🚀 Live Website
 
-❌ **HTTP (Not Secure – S3 Website Endpoint)**  
-👉 http://git-hub-devops-1234.s3-website.eu-north-1.amazonaws.com/
-
-✅ **HTTPS (Secure – CloudFront)**  
-👉 https://d2y6nbm2sahhg9.cloudfront.net/
+✅ **HTTPS (Netlify)**  
+👉 https://varad-gotkhindikar-portfolio.netlify.app/
 
 ---
 
@@ -25,7 +22,7 @@ It represents my work, technical background, and contact details in a clean and 
 - Smooth scrolling and animations  
 - Showcases projects and contact information  
 - Automatically deployed on every code update  
-- Hosted on AWS using static website hosting  
+- Served over HTTPS from Netlify's global CDN  
 
 ---
 
@@ -34,54 +31,41 @@ It represents my work, technical background, and contact details in a clean and 
 | Component | Technology |
 |---------|------------|
 | **Frontend** | HTML, CSS, JavaScript |
-| **Hosting** | AWS S3 |
-| **Secure Delivery** | AWS CloudFront |
-| **Automation** | GitHub Actions |
-| **Region** | eu-north-1 (Stockholm) |
+| **Hosting & CDN** | Netlify |
+| **CI/CD** | Netlify Git-based continuous deployment |
+| **HTTPS** | Automatic TLS certificate from Netlify |
 
 ---
 
-## 🔄 Deployment Workflow (HTTP)
+## 🔄 CI/CD Workflow
 
-1. Website code is pushed to the **main branch** on GitHub.  
-2. GitHub Actions automatically runs the deployment workflow.  
-3. Updated files are uploaded to the **AWS S3 bucket**.  
-4. S3 serves the website using the **HTTP website endpoint**.  
+Netlify is connected to this GitHub repository and handles the full pipeline. Configuration lives in [`netlify.toml`](netlify.toml).
 
-⚠️ This endpoint is **not secure** because it does not support HTTPS.
+### Continuous Deployment (production)
+1. Code is pushed (or a pull request is merged) to the **main** branch.  
+2. Netlify detects the commit and starts a deploy automatically.  
+3. The static files are published atomically to Netlify's CDN — visitors never see a half-updated site.  
+4. The live site at https://varad-gotkhindikar-portfolio.netlify.app/ is updated over HTTPS.
 
----
+### Continuous Integration (pull requests)
+1. Open a pull request against **main**.  
+2. Netlify builds a **Deploy Preview** with its own unique URL and posts the status check and link on the pull request.  
+3. Review the change live before merging; merging promotes it to production.
 
-
-## 🔐 Secure HTTPS Workflow (CloudFront)
-
-To secure the website, **AWS CloudFront** is configured in front of the S3 bucket.
-
-### How HTTPS Works
-
-1. The user accesses the website via the **CloudFront HTTPS URL**.  
-2. CloudFront handles **SSL/TLS encryption**.  
-3. CloudFront fetches content from the **S3 bucket (origin)**.  
-4. Content is cached at edge locations for better performance.  
-5. The website is delivered securely over **HTTPS**.
-
----
-
-## 📊 Architecture Diagram
-
-<img width="1793" height="712" alt="Screenshot 2026-01-02 203300" src="https://github.com/user-attachments/assets/64e0f823-d527-45f1-9cac-d20a45267e4b" />
+### Rollbacks
+Every deploy is kept in the Netlify dashboard. Any previous deploy can be republished instantly with **"Publish deploy"**.
 
 ---
 
 ## ✅ Testing the Deployment
 
 1. Make a small change (for example, edit `index.html`).  
-2. Push the changes to the **main branch**.  
-3. Go to the **Actions** tab in the GitHub repository.  
-4. Wait for the workflow to complete successfully.  
-5. Open the secure website link and refresh the page:
+2. Push the changes to a new branch and open a pull request.  
+3. Open the **Deploy Preview** link Netlify adds to the pull request and check the change.  
+4. Merge the pull request into **main**.  
+5. Wait for the production deploy to finish in the Netlify dashboard, then refresh:
 
-👉 https://d2y6nbm2sahhg9.cloudfront.net/
+👉 https://varad-gotkhindikar-portfolio.netlify.app/
 
 ---
 
@@ -91,7 +75,4 @@ This project is open-source and available under the **MIT License**.
 
 ---
 
-💡 **Tip:**  
-
-For production use, always serve static websites through **CloudFront with HTTPS** instead of exposing the S3 website endpoint directly.
-
+💡 **Tip:** Use Deploy Previews to review every change on a real URL before it reaches production.
