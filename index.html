@@ -29,6 +29,7 @@
       <li><a href="#skills">Skills</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#achievements">Achievements</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -119,6 +120,17 @@
   <section id="experience">
     <h2 class="reveal">Professional <span class="gradient-text">Experience</span></h2>
     <div class="experience-timeline">
+      <div class="experience-item">
+        <div class="experience-node"></div>
+        <div class="glass-card">
+          <h3>Octazen Technology <span style="font-size: 0.95rem; font-weight: normal; color: var(--text-dim);">(Onsite, Kolhapur)</span></h3>
+          <h4 class="gradient-text">Software &amp; AI Intern (Sep 2026 – Present)</h4>
+          <ul style="margin-top: 15px; color: var(--text-dim); list-style-position: inside;">
+            <li>Currently working on mobile application using Flutter with backend nodejs</li>
+            <li>Developing scalable architecture for better performance and user experience.</li>
+          </ul>
+        </div>
+      </div>
       <div class="experience-item">
         <div class="experience-node"></div>
         <div class="glass-card">
@@ -243,6 +255,82 @@
     </div>
   </section>
 
+  <!-- Achievements Section (3D Card Deck) -->
+  <section id="achievements" class="achievements-section">
+    <div class="achievements-header">
+      <h2 class="reveal">Key <span class="gradient-text">Achievements</span></h2>
+      <p class="reveal section-subtitle">
+        Interactive 3D Deck &bull; Pick any card from the deck or draw to reveal verified offers, selections, and competitive milestones.
+      </p>
+
+      <div class="deck-action-bar reveal">
+        <button id="draw-card-btn" class="btn btn-primary" aria-label="Draw Card"><i class="fas fa-hand-pointer"></i> Draw Card</button>
+        <button id="shuffle-deck-btn" class="btn btn-outline" aria-label="Shuffle Deck"><i class="fas fa-shuffle"></i> Shuffle Deck</button>
+        <button id="fan-toggle-btn" class="btn btn-outline" aria-label="Toggle Deck Spread"><i class="fas fa-layer-group"></i> <span id="fan-btn-text">Spread Fan</span></button>
+      </div>
+    </div>
+
+    <div class="achievements-stage-container reveal">
+      <!-- Deck Table Area (Left/Top) -->
+      <div class="deck-table-side">
+        <div class="deck-counter-badge">
+          <i class="fas fa-clone gradient-text"></i>
+          <span>Achievement Deck &bull; <strong id="deck-count-num">8</strong> Cards</span>
+        </div>
+        <div class="deck-wrapper">
+          <div class="cards-deck-stack" id="cards-deck-stack">
+            <!-- Deck cards dynamically injected & styled by script.js -->
+          </div>
+        </div>
+        <p class="deck-hint"><i class="fas fa-hand-point-up"></i> Click any card in the deck to reveal</p>
+      </div>
+
+      <!-- Picked Card Showcase Area (Right/Stage) -->
+      <div class="showcase-side">
+        <div class="showcase-card-container">
+          <!-- 3D Flippable Card Stage -->
+          <div class="showcase-card-3d" id="showcase-card-3d">
+            <div class="card-inner-flipper is-flipped" id="card-inner-flipper">
+              
+              <!-- Card Back -->
+              <div class="card-face-side card-back-design">
+                <div class="card-back-frame">
+                  <div class="card-corner top-left"><span>♠</span></div>
+                  <div class="card-corner top-right"><span>♠</span></div>
+                  <div class="card-corner bottom-left"><span>♠</span></div>
+                  <div class="card-corner bottom-right"><span>♠</span></div>
+                  
+                  <div class="card-back-pattern">
+                    <div class="card-center-emblem">
+                      <div class="emblem-rings"></div>
+                      <i class="fas fa-microchip emblem-icon"></i>
+                      <div class="emblem-brand">VARAD</div>
+                      <div class="emblem-sub">AI &bull; ML &bull; DATA</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card Front -->
+              <div class="card-face-side card-front-design" id="card-front-design">
+                <!-- Dynamically populated by JS with initial card -->
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Showcase Navigation & Controls -->
+          <div class="showcase-controls">
+            <button id="prev-card-btn" class="btn-deck-nav" title="Previous Achievement" aria-label="Previous Achievement"><i class="fas fa-chevron-left"></i></button>
+            <button id="flip-card-btn" class="btn btn-outline btn-deck-action"><i class="fas fa-rotate"></i> Flip Card</button>
+            <button id="view-cert-btn" class="btn btn-primary btn-deck-action"><i class="fas fa-expand"></i> View Full Image</button>
+            <button id="next-card-btn" class="btn-deck-nav" title="Next Achievement" aria-label="Next Achievement"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Contact Section -->
   <section id="contact">
     <h2 class="reveal">Get In <span class="gradient-text">Touch</span></h2>
@@ -271,6 +359,25 @@
   <footer style="text-align: center; padding: 40px; border-top: 1px solid var(--glass-border);">
     <p>© 2026 Varad Gotkhindikar. Designed and developed with passion.</p>
   </footer>
+
+  <!-- Achievement Lightbox Modal -->
+  <div id="achievement-lightbox" class="achievement-lightbox-modal">
+    <div class="lightbox-overlay" id="lightbox-overlay"></div>
+    <div class="lightbox-content glass-card">
+      <button class="lightbox-close-btn" id="lightbox-close-btn" aria-label="Close Preview">&times;</button>
+      <div class="lightbox-header">
+        <span class="lightbox-badge" id="lightbox-badge"></span>
+        <h3 id="lightbox-title"></h3>
+        <p id="lightbox-subtitle" class="gradient-text"></p>
+      </div>
+      <div class="lightbox-img-wrapper" id="lightbox-img-wrapper">
+        <img id="lightbox-img" src="" alt="Achievement Fullscreen Preview">
+      </div>
+      <div class="lightbox-footer">
+        <p id="lightbox-desc"></p>
+      </div>
+    </div>
+  </div>
 
   <!-- GSAP & Animations -->
   <script src="script.js"></script>
